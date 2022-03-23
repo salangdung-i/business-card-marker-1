@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styles from '../card/card.module.css';
 
 
-const DEFAULT_IMAGE = '/images/default_logo.png';
+const DEFAULT_IMAGE = process.env.PUBLIC_URL + '/images/default_logo.png';
 
 const Card = memo(({ card }) => {
   const { name, company, title, email, message, theme, fileURL } = card;
