@@ -26,7 +26,20 @@ class AuthService {
       default:
         throw new Error(`not supported provider: ${providerName}`);
     }
+
   }
+
+  // 사용자의 로그인 상태 변경에 대한 관찰 
+  onAuthChange(onUserChaenged) {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      onUserChaenged(user);
+    });
+  }
+
+  logout() {
+    this.firebaseAuth.signOut();
+  }
+
 }
 
 export default AuthService;
