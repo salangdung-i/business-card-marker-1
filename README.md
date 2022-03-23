@@ -89,16 +89,17 @@ Auth Service 클래스 생성 시 firebaseApp를 넣어주고 클래스에선 ge
 Switch     -> Routes  
 useHistory -> useNavigate
 </pre>
-[react-dom](https://reactrouter.com/docs/en/v6/getting-started/concepts#locations)
-
+[react-dom 공식문서](https://reactrouter.com/docs/en/v6/getting-started/concepts#locations)
+<br/>
 
 5. react-router를 사용한 github-pages 배포  
-github-pages로 react-router를 사용한 프로젝트를 배포했을 경우엔 라우터가 가리키는 경로는 "/" 즉 https://salangdung-i.github.io/로 이동하려고 합니다. 하지만 실제 프로젝트는 https://salangdung-i.github.io/business-card-marker-1/ 에 있기 때문에 빈화면이 출력되는 오류가 발생했습니다. 따라서 BrowserRouter에 basename={process.env.PUBLIC_URL}를 추가하고, 이미지 파일 경로도 process.env.PUBLIC_URL로 변경해주면 오류를 해결할수 있습니다.
+github-pages로 react-router를 사용한 프로젝트를 배포했을 땐 라우터가 가리키는 경로는 "/" 즉 https://salangdung-i.github.io/로 이동하려고 합니다. 하지만 실제 프로젝트는 https://salangdung-i.github.io/business-card-marker-1/에 있기 때문에 빈 화면이 출력되는 오류가 발생했습니다. 따라서 BrowserRouter에 basename={process.env.PUBLIC_URL}를 추가하고, 이미지 파일 경로도 process.env.PUBLIC_URL로 변경해주면 오류를 해결할 수 있습니다.  
 [react-router 적용한 React 앱을 github pages로 배포하는 법](https://medium.com/@_diana_lee/react-react-router-%EC%A0%81%EC%9A%A9%ED%95%9C-react-%EC%95%B1%EC%9D%84-github-pages%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EB%8A%94-%EB%B2%95-5f6119c6a5d9)
+<br/>
 
-6. firebase > Authentication
-처음 프로젝트를 완성해서 github-pages 배포 했을 때 빈화면만 나오는 오류를 겪었습다. 그땐 netlify를 사용해 배포했고, 로그인화면에서 auth가 제대로 동작하지 않아, firebase > Authentication > Sing-in mehtod에 배포한 도메인주소를 추가하여 해결했었습니다. 
-❗️하지만 이번엔 firebase > Authentication > Sing-in mehtod에 도메인 주소 추가가 되질 않았습니다. 엄청난 구글링을 통해 Google Colud platform의 Oauth2.0 클라이언트에 https://salangdung-i.github.io 주소를 추가하고 잠시 기다리니 firebase에서도 추가가 되었습니다. 이로써 오류를 해결할 수 있었습니다.  
+6. firebase > Authentication  
+처음 프로젝트를 완성해서 github-pages 배포했을 때 빈 화면만 나오는 오류를 겪었습니다. 그땐 netlify를 사용해 배포했고, 로그인 화면에서 auth가 제대로 동작하지 않아, firebase > Authentication > Sing-in mehtod에 배포한 도메인 주소를 추가하여 해결했었습니다. 
+❗️하지만 이번엔 firebase > Authentication > Sing-in mehtod에 도메인 주소 추가가 되질 않았습니다. 엄청난 구글링을 통해 Google Colud platform의 Oauth2.0 클라이언트에 https://salangdung-i.github.io 주소를 추가하고 잠시 기다리니 firebase에서도 추가가 되었습니다. 이로써 오류를 해결할 수 있었습니다.
 
 
 <br><br>
