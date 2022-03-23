@@ -16,7 +16,7 @@ const CardAddForm = ({ addCard }) => {
   const onSubmit = event => {
     event.preventDefault();
     const card = {
-      id: Date.now(), //uuid
+      id: Date.now(),
       name: nameRef.current.value || '',
       company: companyRef.current.value || '',
       theme: themeRef.current.value,
@@ -79,7 +79,7 @@ const CardAddForm = ({ addCard }) => {
       <div className={styles.fileInput}>
         <ImageFileInput name={file.fileName} />
       </div>
-      <Button name='Add' onSubmit={onSubmit} />
+      <Button name='Add' onClick={onSubmit} />
     </form>
   );
 }

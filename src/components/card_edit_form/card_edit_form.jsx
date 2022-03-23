@@ -4,14 +4,21 @@ import styles from '../card_edit_form/card_edit_form.module.css';
 import ImageFileInput from '../image_file_input/image_file_input';
 
 
-const CardEditForm = ({ card }) => {
+const CardEditForm = ({ card, updateCard, deleteCard }) => {
   const { name, company, title, email, message, theme, fileName } = card;
   const onSubmit = () => {
-
+    deleteCard(card);
   };
 
-  const onChange = () => {
-
+  const onChange = e => {
+    if (e.currentTarget == null) {
+      return;
+    }
+    e.preventDefault();
+    updateCard({
+      ...card,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
   };
 
   return (
