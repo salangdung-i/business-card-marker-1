@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,9 +10,9 @@ import CardRepository from './services/card_repository';
 
 const authService = new AuthService(firebaseApp);
 const imageUploader = new ImageUploader();
-const FileInput = props => (
+const FileInput = memo(props => (
   <ImageFileInput {...props} imageUploader={imageUploader} />
-);
+));
 const cardRepository = new CardRepository(firebaseApp);
 
 ReactDOM.render(

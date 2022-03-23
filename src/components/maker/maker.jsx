@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import Editor from '../editor/editor';
 import Footer from '../footer/footer';
@@ -11,9 +11,9 @@ const Maker = ({ authService, FileInput, cardRepository }) => {
   const [userId, setUserId] = useState(location && location.id);
   const [cards, setCards] = useState({});
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   const navigate = useNavigate();
   const goToHome = () => {
@@ -31,7 +31,7 @@ const Maker = ({ authService, FileInput, cardRepository }) => {
     return () => {
       stopSync();
     }
-  }, [userId]);
+  }, [userId, cardRepository]);
 
   // 로그인 관련
   useEffect(() => {
@@ -42,7 +42,7 @@ const Maker = ({ authService, FileInput, cardRepository }) => {
         goToHome();
       }
     });
-  });
+  }, [authService, userId, location]);
 
   const createOrUpdateCard = card => {
     setCards(cards => {
