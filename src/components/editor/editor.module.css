@@ -1,0 +1,14 @@
+@value makerLightGrey from '../../common/colors.css';
+
+.editor {
+  flex-basis: 50%;
+  border-right: 1px solid makerLightGrey;
+  padding: 8px 32px;
+  overflow-y: auto;  
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+}
