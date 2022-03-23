@@ -1,47 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import Editor from '../editor/editor';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from '../maker/maker.module.css';
 import Preview from '../preview/preview';
 
-const Maker = ({ authService, FileInput }) => {
-  const [cards, setCards] = useState({
-    '1': {
-      id: '1',
-      name: 'eunji',
-      company: 'Samsung',
-      theme: 'light',
-      title: 'Software Engineer',
-      email: 'eunji@naver.com',
-      message: 'go for it',
-      fileName: 'eunji',
-      fileURL: '',
-    },
-    '2': {
-      id: '2',
-      name: 'eunji2',
-      company: 'Samsung',
-      theme: 'light',
-      title: 'Software Engineer',
-      email: 'eunji@naver.com',
-      message: 'go for it',
-      fileName: 'eunji',
-      fileURL: 'eunji.png',
-    },
-    '3': {
-      id: '3',
-      name: 'eunji3',
-      company: 'Samsung',
-      theme: 'light',
-      title: 'Software Engineer',
-      email: 'eunji@naver.com',
-      message: 'go for it',
-      fileName: 'eunji',
-      fileURL: 'eunji.png',
-    },
-  });
+const Maker = ({ authService, FileInput, cardRepository }) => {
+  const location = useLocation().state;
+  const [userId, setUserId] = useState(location && location.id);
+  const [cards, setCards] = useState({});
 
   const onLogout = () => {
     authService.logout();
@@ -51,9 +19,26 @@ const Maker = ({ authService, FileInput }) => {
   const goToHome = () => {
     navigate("/");
   }
+
+  // DB관련
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const stopSync = cardRepository.syncCards(userId, cards => {
+      setCards(cards);
+    })
+    return () => {
+      stopSync();
+    }
+  }, [userId]);
+
+  // 로그인 관련
   useEffect(() => {
     authService.onAuthChange(user => {
-      if (!user) {
+      if (user) {
+        setUserId(user.uid);
+      } else {
         goToHome();
       }
     });
@@ -65,6 +50,7 @@ const Maker = ({ authService, FileInput }) => {
       updated[card.id] = card;
       return updated;
     });
+    cardRepository.saveCard(userId, card);
   };
 
   const deleteCard = card => {
@@ -73,6 +59,7 @@ const Maker = ({ authService, FileInput }) => {
       delete updated[card.id];
       return updated;
     });
+    cardRepository.saveCard(userId, card);
   }
 
   return (
